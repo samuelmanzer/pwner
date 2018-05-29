@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pwner
+  labels:
+    app: pwner
+    chart: {{ .Chart.Name }}-{{ .Chart.Version }}
+spec:
+  # This shows how to use a simple value. This will look for a passed-in value called restartPolicy.
+  restartPolicy: Always
+  containers:
+  - name: pwner
+    image: docker
+    imagePullPolicy: Always
+    command: ["/bin/sleep", "9000"]
+    volumeMounts:
+      - name: docker
+        mountPath: /var/run/docker.sock
+  volumes:
+    - name: docker
+      hostPath:
+        path: /var/run/docker.sock
